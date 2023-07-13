@@ -19,4 +19,24 @@ public class Camp {
         this.column = column;
     }
     
+    boolean addNeighbour(Camp neighbour) {
+        boolean differentLine = line != neighbour.line;
+        boolean differentColumn = column != neighbour.column;
+        boolean diagonal = differentLine && differentColumn;
+
+        int deltaLine = Math.abs(line - neighbour.line);
+        int deltaColumn = Math.abs(column - neighbour.column);
+        int deltaGeneral = deltaColumn + deltaLine;
+
+        if(deltaGeneral == 1 && !diagonal){
+            neighbours.add(neighbour);
+            return true;
+        }else if(deltaGeneral == 2 && diagonal){
+            neighbours.add(neighbour);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
 }
