@@ -76,4 +76,75 @@ public class Camp {
     public boolean isMarked(){
         return marked;
     }
+
+    public boolean isOpen(){
+        return open;
+    }
+
+    public boolean isClosed(){
+        return !isOpen();
+    }
+
+    boolean goalCompleted(){
+        boolean unveiled = !mined && open;
+        boolean protectedCamp = mined && marked;
+        return unveiled || protectedCamp;
+    }
+
+    long minesOnNeighbourhood(){
+        return neighbours.stream().filter(v ->v.mined).count();
+    }
+
+    void restart(){
+        open = false;
+        mined = false;
+        marked = false;
+    }
+
+    public String toString(){
+        if(marked){
+            return"x";
+        }else if(open && mined){
+            return "*";
+        }else if(open && minesOnNeighbourhood()> 0 ){
+            return Long.toString(minesOnNeighbourhood());
+        }else if(open){
+            return"";
+        }else{
+            return"?";
+        }
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
+
+    public boolean isMined() {
+        return mined;
+    }
+
+    public void setMined(boolean mined) {
+        this.mined = mined;
+    }
+
+    public void setMarked(boolean marked) {
+        this.marked = marked;
+    }
+
+    public List<Camp> getNeighbours() {
+        return neighbours;
+    }
+
+    public void setNeighbours(List<Camp> neighbours) {
+        this.neighbours = neighbours;
+    }
+    
 }
