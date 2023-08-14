@@ -48,20 +48,20 @@ public class Camp {
     }
 
     boolean open() {
-        
+
         if (!open && !marked) {
             open = true;
-            
+
             if (mined) {
                 throw new ExplosionException();
             }
 
-            if(safeNeighbourhood()){
+            if (safeNeighbourhood()) {
                 neighbours.forEach(v -> v.open());
             }
             return true;
-        }else{
-        return false;
+        } else {
+            return false;
         }
     }
 
@@ -69,49 +69,49 @@ public class Camp {
         return neighbours.stream().noneMatch(v -> v.mined);
     }
 
-    void mined(){
+    void mined() {
         mined = true;
     }
 
-    public boolean isMarked(){
+    public boolean isMarked() {
         return marked;
     }
 
-    public boolean isOpen(){
+    public boolean isOpen() {
         return open;
     }
 
-    public boolean isClosed(){
+    public boolean isClosed() {
         return !isOpen();
     }
 
-    boolean goalCompleted(){
+    boolean goalCompleted() {
         boolean unveiled = !mined && open;
         boolean protectedCamp = mined && marked;
         return unveiled || protectedCamp;
     }
 
-    long minesOnNeighbourhood(){
-        return neighbours.stream().filter(v ->v.mined).count();
+    long minesOnNeighbourhood() {
+        return neighbours.stream().filter(v -> v.mined).count();
     }
 
-    void restart(){
+    void restart() {
         open = false;
         mined = false;
         marked = false;
     }
 
-    public String toString(){
-        if(marked){
-            return"x";
-        }else if(open && mined){
+    public String toString() {
+        if (marked) {
+            return "x";
+        } else if (open && mined) {
             return "*";
-        }else if(open && minesOnNeighbourhood()> 0 ){
+        } else if (open && minesOnNeighbourhood() > 0) {
             return Long.toString(minesOnNeighbourhood());
-        }else if(open){
-            return"";
-        }else{
-            return"?";
+        } else if (open) {
+            return "";
+        } else {
+            return "?";
         }
     }
 
@@ -146,5 +146,5 @@ public class Camp {
     public void setNeighbours(List<Camp> neighbours) {
         this.neighbours = neighbours;
     }
-    
+
 }
