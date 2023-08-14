@@ -53,10 +53,10 @@ public class Camp {
             open = true;
             
             if (mined) {
-                throw new ExplosionException()
+                throw new ExplosionException();
             }
 
-            if(neighbourshoodSafe()){
+            if(safeNeighbourhood()){
                 neighbours.forEach(v -> v.open());
             }
             return true;
@@ -67,5 +67,13 @@ public class Camp {
 
     boolean safeNeighbourhood() {
         return neighbours.stream().noneMatch(v -> v.mined);
+    }
+
+    void mined(){
+        mined = true;
+    }
+
+    public boolean isMarked(){
+        return marked;
     }
 }
