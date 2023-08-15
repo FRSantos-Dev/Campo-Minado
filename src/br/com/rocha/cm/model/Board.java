@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import exception.ExplosionException;
+
 public class Board {
 
     private int lines;
@@ -20,6 +22,18 @@ public class Board {
         generateCamps();
         associateNeighbours();
         raffleMines();
+    }
+
+    public void open(int line, int column){
+        try {
+            camps.parallelStream()
+                .filter(c -> c.getLine() == line && c.getColumn() == column)
+                .findFirst()
+                .ifPresent(c -> c.open());
+        } catch (ExplosionException e) {
+            camps.forEach(c -> c.setOpen(true));
+            throw e;
+        }
     }
 
     private void generateCamps() {
@@ -58,10 +72,22 @@ public class Board {
         raffleMines();
     }
 
-    @Override
+    
     public String toString() {
-        return "Board [lines=" + lines + ", columns=" + columns
-                + ", mines=" + mines + ", camps=" + camps + "]";
+        StringBuilder sb = new StringBuilder();
+
+        int i = 0;
+        for(int l = 0; l < lines; l++){
+            for(int c = 0; c < columns; c++){
+                sb.append(" ");
+                sb.append(camps.get(i));
+                sb.append(" ");
+                i++;
+            }
+            sb.append("\n");
+        }
+
+        return sb.toString();
     }
 
 }
