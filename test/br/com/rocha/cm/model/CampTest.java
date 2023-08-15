@@ -88,22 +88,22 @@ public class CampTest {
 
     @Test
     void testOpenNotMinedNotMarked() {
-        assertTrue(camp.open());
+        assertTrue(camp.isOpen());
     }
 
     @Test
     void testOpenNotMinedMarked() {
         camp.alternateMark();
-        camp.mined();
-        assertTrue(camp.open());
+        camp.isMined();
+        assertTrue(camp.isOpen());
     }
 
     @Test
     void testOpenMinedNotMarked() {
-        camp.mined();
+        camp.isMined();
 
         assertThrows(ExplosionException.class, () -> {
-            camp.open();
+            camp.isOpen();
         });
     }
 

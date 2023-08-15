@@ -3,8 +3,6 @@ package view;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import exception.ExplosionException;
 import exception.SignOutException;
 import model.Board;
@@ -60,6 +58,7 @@ public class BoardConsole {
                     board.alternateMark(xy.next(), xy.next());
                 }
             }
+            System.out.println(board);
             System.out.println("You win !!");
         } catch (ExplosionException e) {
             System.out.println(board);

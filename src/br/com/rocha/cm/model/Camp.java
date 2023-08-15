@@ -16,12 +16,12 @@ public class Camp {
 
     private List<Camp> neighbours = new ArrayList<>();
 
-    Camp(int line, int column) {
+    public Camp(int line, int column) {
         this.line = line;
         this.column = column;
     }
 
-    boolean addNeighbour(Camp neighbour) {
+    public boolean addNeighbour(Camp neighbour) {
         boolean differentLine = line != neighbour.line;
         boolean differentColumn = column != neighbour.column;
         boolean diagonal = differentLine && differentColumn;
@@ -41,7 +41,7 @@ public class Camp {
         }
     }
 
-    void alternateMark() {
+    public void alternateMark() {
         if (!open) {
             marked = !marked;
         }
