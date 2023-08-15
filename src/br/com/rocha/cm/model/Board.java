@@ -14,10 +14,10 @@ public class Board {
 
     private final List<Camp> camps = new ArrayList<>();
 
-    public Board(int linhas, int colunas, int minas) {
-        this.lines = linhas;
-        this.columns = colunas;
-        this.mines = minas;
+    public Board(int lines, int columns, int mines) {
+        this.lines = lines;
+        this.columns = columns;
+        this.mines = mines;
 
         generateCamps();
         associateNeighbours();
@@ -34,6 +34,13 @@ public class Board {
             camps.forEach(c -> c.setOpen(true));
             throw e;
         }
+    }
+
+    public void alternateMark(int line, int column){
+        camps.parallelStream()
+            .filter(c -> c.getLine() == line && c.getColumn() == column)
+            .findFirst()
+            .ifPresent(c -> c.alternateMark());
     }
 
     private void generateCamps() {

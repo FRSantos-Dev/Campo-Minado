@@ -123,7 +123,7 @@ public class Camp {
         return column;
     }
 
-    public void setOpen(boolean open) {
+    void setOpen(boolean open) {
         this.open = open;
     }
 
