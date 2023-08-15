@@ -1,4 +1,4 @@
-package test.br.com.rocha.cm.model.exception;
+package exception;
 
 public class ExplosionException  extends RuntimeException{
     
