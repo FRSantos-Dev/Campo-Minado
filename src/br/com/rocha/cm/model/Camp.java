@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import test.br.com.rocha.cm.model.exception.ExplosionException;
+import exception.ExplosionException;
 
 public class Camp {
 
